@@ -1,0 +1,388 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+:root {
+    --accent: #700032;
+}
+
+body {
+    margin: 0;
+    font-family: fantasy, sans-serif;
+    color: white;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding: 1em;
+    overflow-x: hidden;
+    height: 95vh;
+}
+
+.body-start {
+    background: #0e0e0e;
+}
+
+.body{
+    -webkit-transition: 1s ease-in-out;
+    -o-transition: 1s ease-in-out;
+    transition: 1s ease-in-out;
+    background-image: -o-radial-gradient(circle at center center, rgb(9, 0, 4), rgb(2, 2, 2));
+    background-image: radial-gradient(circle at center center, rgb(9, 0, 4), rgb(2, 2, 2));
+}
+
+main {
+    margin: 0 10vw;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+h2 {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    color: #700032;
+    font-size: 1.3em;
+}
+
+.heart {
+    background-color: #ff003f;
+    border-radius: 0 !important;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.heart::after {
+    content: "";
+    width: 25px;
+    height: 25px;
+    background-color: #ff003f;
+    display: block;
+    border-radius: 50%;
+    position: absolute;
+    left: -12px
+}
+.heart::before {
+    content: "";
+    width: 25px;
+    height: 25px;
+    background-color: #ff003f;
+    display: block;
+    border-radius: 50%;
+    position: absolute;
+    top: -12px
+}
+
+.difficulty-text {
+    margin: 0 0 -5px 0;
+    color: #272727;
+    font-size: 0.8em;
+}
+
+.pause-button {
+    border: none;
+    cursor: pointer;
+    background-color: var(--accent);
+    padding: 0.5em 1em;
+    font-size: 0.8em;
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    color: white;
+}
+
+meter::-webkit-meter-optimum-value {
+    background: #00ff5d;
+}
+.meter-yellow::-webkit-meter-optimum-value {
+    background: #ffdd00;
+}
+.meter-orange::-webkit-meter-optimum-value {
+    background: #ff701d;
+}
+.meter-red::-webkit-meter-optimum-value {
+    background: #ff003f;
+}
+
+.info-container {
+    color: white;
+    font-size: 1.5em;
+    display: none;
+}
+
+.info-table {
+    min-width: 7vw;
+}
+
+.game-over {
+    position: absolute;
+    left: caLc(50% - 75px);
+    top: 40vh;
+    font-size: 3em;
+    display: none;
+}
+
+.score {
+    color: #00ff86;
+}
+
+.dif-meter {
+    min-width: 10vw;
+}
+.lives {
+    color: #ff003f;
+}
+
+.flex {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.boss {
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-size: 1.5em;
+}
+
+.start-game {
+    cursor: pointer;
+    background-color: var(--accent);
+    text-align: center;
+    padding: 0.5em 1em;
+    font-size: 2em;
+    width: 100px;
+    margin-left: calc(50% - 100px);
+}
+
+.restart-game {
+    cursor: pointer;
+    background-color: var(--accent);
+    text-align: center;
+    padding: 0.5em 1em;
+    font-size: 1.5em;
+    margin: 0.5rem;
+    position: absolute;
+    left: calc(50% - 80px);
+    top: 55vh;
+    display: none;
+}
+
+.timer {
+    font-size: 5em;
+    width: 20px;
+    left: calc(50% - 10px);
+    top: calc(40%);
+    text-align: center;
+    position: absolute;
+}
+
+.guide {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.guide .block, p, .shape-container {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 5em;
+    flex: 1 1 5em;
+    font-family: Consolas, sans-serif;
+    color: #b7b7b7;
+}
+
+.level-up {
+    color: #00ff86;
+}
+
+.level-up::after {
+    display: block;
+    content: "Level Up!";
+    color: rgb(0, 255, 165);
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 80px);
+    font-size: 2em;
+    -webkit-animation: 2s floatUp;
+    animation: 2s floatUp;
+}
+
+@-webkit-keyframes floatUp {
+    0% {
+        top: 50%;
+        opacity: 0.6;
+    }
+
+    100%{
+        top: 40%;
+        opacity: 0;
+    }
+}
+
+@keyframes floatUp {
+    0% {
+        top: 50%;
+        opacity: 0.6;
+    }
+
+    100%{
+        top: 40%;
+        opacity: 0;
+    }
+}
+
+.block {
+    min-height: 200px;
+    min-width: 250px;
+    background-color: rgb(23, 23, 23);
+    margin: 0.5em;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.shape-container {
+    position: relative;
+    margin: 2em;
+}
+
+.shape-info {
+    margin: 1em;
+}
+
+li {
+    line-height: 1.68;
+}
+
+.shape-left-click {
+    position: absolute;
+    left: calc(50% - 50px);
+    height: 100px;
+    width: 100px;
+    background-color: #700032;
+    border-radius: 50%;
+}
+
+.shape-right-click {
+    position: absolute;
+    left: calc(50% - 50px);
+    height: 100px;
+    width: 100px;
+    background-color: #006370;
+    border-radius: 50%;
+}
+
+.shape-boss {
+    position: absolute;
+    left: calc(50% - 50px);
+    height: 100px;
+    width: 100px;
+    background-color: #b57d00;
+    border-radius: 50%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: white;
+    font-family: fantasy, sans-serif;
+    font-size: 2em;
+}
+
+.shape-hold {
+    position: absolute;
+    left: calc(50% - 50px);
+    height: 100px;
+    width: 100px;
+    background-color: #00ff86;
+    border-radius: 50%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: white;
+    font-family: fantasy, sans-serif;
+    font-size: 2em;
+}
+
+.shape-heart {
+    width: 50px;
+    height: 50px;
+    left: calc(50% - 25px);
+    background-color: #ff003f;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    margin-top: 25px ;
+}
+.shape-heart::after {
+    content: "";
+    width: 50px;
+    height: 50px;
+    background-color: #ff003f;
+    display: block;
+    border-radius: 50%;
+    position: absolute;
+    left: -25px
+
+}
+.shape-heart::before {
+    content: "";
+    width: 50px;
+    height: 50px;
+    background-color: #ff003f;
+    display: block;
+    border-radius: 50%;
+    position: absolute;
+    top: -25px
+}
