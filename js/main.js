@@ -58,16 +58,6 @@ function startGame() {
     getBodyEl.classList.add("body");
 }
 
-// -- Pause function
-function PauseGame() {
-    alert("Game paused")
-}
-
-// -- Prevent right click from opening context menu
-window.addEventListener("contextmenu", function (e) {
-    e.preventDefault();
-});
-
 // -- Timer function
 function timer(){
     let sec = 3;
@@ -80,7 +70,7 @@ function timer(){
 
             createShape();
         }
-    }, 1000);
+    }, 700);
 }
 
 // -- Create shape
@@ -89,9 +79,10 @@ function createShape() {
     let shapeTime =  2 - (difficulty / 7.5);
     let exists = true;
     let shapeX = Math.random() * (window.innerWidth / 1.04);
-    let shapeY = Math.random() * (window.innerHeight / 1.06);
+    let shapeY = Math.random() * (window.innerHeight / 1.06 - 40);
     let clickType = Math.floor(Math.random() * 500);
     let shapeSize = 50;
+    let bar;
 
     // bind variables to styling
     shape.style.height = shapeSize + "px";
@@ -125,6 +116,15 @@ function createShape() {
                 getBodyEl.style.backgroundImage = currentBackground;
             }, 10);
         });
+        bar = new ProgressBar.Circle(shape, {
+            strokeWidth: 0,
+            easing: 'linear',
+            duration: 0,
+            color: 'rgba(255,255,255,0)',
+            trailColor: 'rgba(238,238,238,0)',
+            trailWidth: 0,
+            svgStyle: null
+        });
     }
     ////////////////////////////////////
     // --------- HOVER SHAPE----------//
@@ -133,6 +133,8 @@ function createShape() {
         shape.style.width = 30 + 'px';
         shape.style.height = 30 + "px";
         shape.style.backgroundColor = "#00ff86";
+
+        randomizeCardPosition(shape);
 
         // -- Determine float direction
         let floatRotation = Math.floor(Math.random() * 4) + 1;
@@ -171,7 +173,6 @@ function createShape() {
 
         let floatDirection = Math.floor(Math.random() * 2) + 1;
 
-        console.log(floatDirection);
         if (floatDirection === 1){
             let shapeOffset = 0;
             let shapeFloat = setInterval(function () {
@@ -210,7 +211,6 @@ function createShape() {
             shape.style.boxShadow = "0px 0px 0px 7px white";
 
             hoverTimerFunction = setInterval(function () {
-                console.log("hover" + hoverTime);
                 hoverTime--;
                 opacity = opacity - 0.033;
                 shape.style.opacity = opacity;
@@ -228,28 +228,48 @@ function createShape() {
             clearInterval(hoverTimerFunction);
             shape.style.boxShadow = "0px 0px 0px 0px rgba(255,255,255,1)";
         });
+        bar = new ProgressBar.Circle(shape, {
+            strokeWidth: 0,
+            easing: 'linear',
+            duration: 0,
+            color: 'rgba(255,255,255,0)',
+            trailColor: 'rgba(238,238,238,0)',
+            trailWidth: 0,
+            svgStyle: null
+        });
     }
     ////////////////////////////////////
     // --------- BOSS SHAPE ----------//
     ////////////////////////////////////
     else if (clickType < 75){
         let clickNumber = 10;
+
         shape.style.backgroundColor = "#b57d00";
         shape.classList.add("boss");
         shapeTime = shapeTime - (difficulty/7) + 2.6 ;
-        shape.innerHTML = clickNumber.toString();
+        shape.insertAdjacentHTML('afterbegin', `<span id="boss-span">${clickNumber.toString()}</span>`);
 
         shape.addEventListener("click", function (e) {
             e.preventDefault();
             clickNumber--;
-            shape.innerHTML = clickNumber.toString();
+            document.querySelector('#boss-span').remove();
+            shape.insertAdjacentHTML('afterbegin', `<span id="boss-span">${clickNumber.toString()}</span>`);
             if (clickNumber === 0){
                 score++;
                 getScoreEl.innerHTML = score.toString();
                 shape.remove();
                 exists = false;
-                levelUpFailSafe = true
+                levelUpFailSafe = true;
             }
+        });
+        bar = new ProgressBar.Circle(shape, {
+            strokeWidth: 10,
+            easing: 'linear',
+            duration: shapeTime * 1000,
+            color: 'rgba(255,255,255,0.51)',
+            trailColor: 'rgba(238,238,238,0)',
+            trailWidth: 1,
+            svgStyle: null
         });
     }
     ////////////////////////////////////
@@ -263,7 +283,16 @@ function createShape() {
             getScoreEl.innerHTML = score.toString();
             shape.remove();
             exists = false;
-            levelUpFailSafe = true
+            levelUpFailSafe = true;
+        });
+        bar = new ProgressBar.Circle(shape, {
+            strokeWidth: 10,
+            easing: 'linear',
+            duration: shapeTime * 1000,
+            color: 'rgba(255,255,255,0.51)',
+            trailColor: 'rgba(238,238,238,0)',
+            trailWidth: 1,
+            svgStyle: null
         });
     }
     ////////////////////////////////////
@@ -277,13 +306,27 @@ function createShape() {
             getScoreEl.innerHTML = score.toString();
             shape.remove();
             exists = false;
-            levelUpFailSafe = true
+            levelUpFailSafe = true;
+        });
+
+        bar = new ProgressBar.Circle(shape, {
+            strokeWidth: 10,
+            easing: 'linear',
+            duration: shapeTime * 1000,
+            color: 'rgba(255,255,255,0.51)',
+            trailColor: 'rgba(238,238,238,0)',
+            trailWidth: 1,
+            svgStyle: null
         });
     }
 
     // -- Append shape to body
     getBodyEl.append(shape);
 
+    // progressbar
+
+
+    bar.animate(1.0);
     // -- Check if the shape has been clicked in time
     setTimeout(function(){
         if (exists === true) {
@@ -313,6 +356,8 @@ function checkLives(lives) {
         getGameOver.innerHTML = "You lost";
         getGameOver.style.display = "block";
         getRestartGame.style.display = "block";
+
+        updateHighscore();
     }
 }
 
@@ -321,10 +366,11 @@ function checkScore(score) {
 
     if (score % 10 === 0 && score !== 0 && levelUpFailSafe === true) {
         increaseDif();
-        levelUpFailSafe = false
+        levelUpFailSafe = false;
     }
 
     if (score >= winScore) {
+        updateHighscore();
         getScoreEl.style.color = "#00ff68";
         getGameOver.innerHTML = "You win!";
         getGameOver.style.display = "block";
@@ -337,3 +383,50 @@ function checkScore(score) {
 function restartGame() {
     location.reload();
 }
+
+let getHighscoreEl = document.getElementById('highscore');
+
+// Load Highscore that has been saved
+window.addEventListener('load', () => {
+    getHighscoreEl.innerHTML = localStorage.getItem('highscore');
+
+});
+
+// Prevent contextmenu from popping up
+window.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+});
+
+// Set new highscore
+function updateHighscore () {
+    if(localStorage.getItem('highscore') < score) {
+        localStorage.setItem('highscore', score.toString());
+        getHighscoreEl.innerHTML = localStorage.getItem('highscore');
+    }
+}
+
+// Temp fix for floating elements going off-screen
+// Custom positioning function for the floating element
+function randomizeCardPosition(shape) {
+    function randomCardX() {
+        let randomX = Math.floor(Math.random() * innerWidth);
+        if (randomX < (innerWidth - 200) && randomX > 200){
+            shape.style.left = randomX + "px";
+        }else {
+            randomCardX();
+        }
+    }
+
+    function randomCardY() {
+        let randomY = Math.floor(Math.random() * innerHeight);
+        if (randomY < (innerHeight - 50) && randomY > 50){
+            shape.style.bottom = randomY + "px";
+        }else {
+            randomCardY();
+        }
+    }
+    randomCardX();
+    randomCardY();
+
+}
+

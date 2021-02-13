@@ -6,30 +6,21 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Mini Game</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body class="body-start">
 
 <div id="info-container" class="info-container">
-    <table class="info-table">
-        <tbody>
-        <tr class="score">
-            <td>Score:</td>
-            <td id="score">0</td>
-        </tr>
-        <tr class="lives">
-            <td>Lives:</td>
-            <td id="lives">5</td>
-        </tr>
-        <tr class="level">
-            <td>Level:</td>
-            <td id="level">1</td>
-        </tr>
-        </tbody>
-    </table>
-    <p class="difficulty-text">Difficulty</p>
     <meter class="dif-meter" min="0" max="10" id="dif-meter" value="0"></meter>
-    <button id="PauseButton" class="pause-button" onclick="PauseGame()">Pause</button>
+
+    <div class="tester-cont">
+        <div class="score">Score: <b id="score">0</b></div>
+        <div class="level">Level: <b id="level">1</b></div>
+        <div class="lives">Lives: <b id="lives">5</b></div>
+        <div class="highscore">Highscore: <b id="highscore">0</b></div>
+    </div>
 </div>
 
 <div id="timer" class="timer"></div>
@@ -67,7 +58,8 @@
             <div class="shape-hold">4</div>
         </div>
         <h2>Hover</h2>
-        <p class="shape-info">This element is destroyed by hovering on it until it disappears. Do it before the time runs out.</p>
+        <p class="shape-info">This element is destroyed by hovering on it until it disappears. Do it before the time
+            runs out.</p>
     </div>
     <div class="block">
         <div class="shape-container">
@@ -80,7 +72,8 @@
         <h2 style="margin-top: 1em;">Objective</h2>
 
         <p class="shape-info">
-            Random elements will start to appear on the screen. Your job is to destroy every element to reach the next level. The way to destroy these elements is explained above.
+            Random elements will start to appear on the screen. Your job is to destroy every element to reach the next
+            level. The way to destroy these elements is explained above.
             After every 10 points the difficulty goes up and destroying elements becomes more challenging. <br><br>
             Good luck!
         </p>
@@ -95,28 +88,27 @@
             <li>After every 10 points you go to the next level.</li>
             <li>If you fail to destroy an element, you lose a life.</li>
             <li>When you reach 0 lives, it's game over.</li>
-            <li>When you reach 150 lives, you win the game.</li>
+            <li>When you reach 150 point, you win the game.</li>
         </ol>
 
     </div>
 
     <div class="block" style="color: #ff003f;">
         <h2>Bugs</h2>
-
         <ol>
-            <li>Hover element can sometimes float off-screen.</li>
+            <li>Safari does not use the proper typography.</li>
             <li>(FireFox only): Hover element won't disappear properly (mouseEnter event works different in FF).</li>
             <li style="color: transparent"></li>
             <li style="color: transparent"></li>
             <li style="color: transparent"></li>
             <li style="color: transparent"></li>
         </ol>
-
     </div>
 </div>
 
 <div id="startGame" class="start-game" onclick="startGame()">Start!</div>
 
+<script src="js/progressbar.js"></script>
 <script src="js/main.js"></script>
 </body>
 

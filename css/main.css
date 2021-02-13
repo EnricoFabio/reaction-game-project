@@ -1,23 +1,16 @@
-/*
-* Prefixed by https://autoprefixer.github.io
-* PostCSS: v7.0.29,
-* Autoprefixer: v9.7.6
-* Browsers: last 4 version
-*/
-
 :root {
     --accent: #700032;
 }
 
 body {
     margin: 0;
-    font-family: fantasy, sans-serif;
+    font-family: 'Fredoka One', cursive, sans-serif;
+    font-weight: 400;
     color: white;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    padding: 1em;
     overflow-x: hidden;
     height: 95vh;
 }
@@ -56,6 +49,8 @@ h2 {
     padding: 0;
     color: #700032;
     font-size: 1.3em;
+    font-family: 'Fredoka One', cursive, sans-serif;
+    font-weight: 400;
 }
 
 .heart {
@@ -86,12 +81,6 @@ h2 {
     top: -12px
 }
 
-.difficulty-text {
-    margin: 0 0 -5px 0;
-    color: #272727;
-    font-size: 0.8em;
-}
-
 .pause-button {
     border: none;
     cursor: pointer;
@@ -102,6 +91,16 @@ h2 {
     right: 1em;
     top: 1em;
     color: white;
+}
+
+.dif-meter {
+    position: absolute;
+    min-width: 10vw;
+    margin: 1rem;
+}
+
+.highscore {
+    color: #ffe28a
 }
 
 meter::-webkit-meter-optimum-value {
@@ -123,10 +122,6 @@ meter::-webkit-meter-optimum-value {
     display: none;
 }
 
-.info-table {
-    min-width: 7vw;
-}
-
 .game-over {
     position: absolute;
     left: caLc(50% - 75px);
@@ -139,9 +134,6 @@ meter::-webkit-meter-optimum-value {
     color: #00ff86;
 }
 
-.dif-meter {
-    min-width: 10vw;
-}
 .lives {
     color: #ff003f;
 }
@@ -158,17 +150,25 @@ meter::-webkit-meter-optimum-value {
     align-items: center;
 }
 
+svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+
+
 .boss {
-    display:-webkit-box;
-    display:-ms-flexbox;
-    display:flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
     font-size: 1.5em;
+}
+
+span {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
 .start-game {
@@ -329,7 +329,6 @@ li {
     -ms-flex-align: center;
     align-items: center;
     color: white;
-    font-family: fantasy, sans-serif;
     font-size: 2em;
 }
 
@@ -350,7 +349,6 @@ li {
     -ms-flex-align: center;
     align-items: center;
     color: white;
-    font-family: fantasy, sans-serif;
     font-size: 2em;
 }
 
@@ -370,7 +368,7 @@ li {
     width: 50px;
     height: 50px;
     background-color: #ff003f;
-    display: block;
+    display: inline; /*Change this to fix the weird shape glitch*/
     border-radius: 50%;
     position: absolute;
     left: -25px
@@ -385,4 +383,15 @@ li {
     border-radius: 50%;
     position: absolute;
     top: -25px
+}
+
+.tester-cont {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.tester-cont div {
+    padding: 0.5rem 1rem;
+    min-width: 100px;
 }
